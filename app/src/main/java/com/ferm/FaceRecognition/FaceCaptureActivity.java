@@ -28,9 +28,8 @@ import com.ferm.FaceRecognition.MLkit.FaceDetectionProcessor;
 import com.ferm.FaceRecognition.MLkit.common.CameraSource;
 import com.ferm.FaceRecognition.MLkit.common.CameraSourcePreview;
 import com.ferm.FaceRecognition.MLkit.common.GraphicOverlay;
+import com.ferm.FaceRecognition.MLkit.common.preference.SettingsActivity;
 import com.google.android.material.button.MaterialButton;
-import com.google.firebase.ml.vision.face.FirebaseVisionFaceDetectorOptions;
-import com.google.firebase.ml.vision.objects.FirebaseVisionObjectDetectorOptions;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,13 +40,6 @@ public class FaceCaptureActivity extends AppCompatActivity
         AdapterView.OnItemSelectedListener,
         CompoundButton.OnCheckedChangeListener {
     private static final String FACE_DETECTION = "Face Detection";
-    private static final String OBJECT_DETECTION = "Object Detection";
-    private static final String AUTOML_IMAGE_LABELING = "AutoML Vision Edge";
-    private static final String TEXT_DETECTION = "Text Detection";
-    private static final String BARCODE_DETECTION = "Barcode Detection";
-    private static final String IMAGE_LABEL_DETECTION = "Label Detection";
-    private static final String CLASSIFICATION_QUANT = "Classification (quantized)";
-    private static final String CLASSIFICATION_FLOAT = "Classification (float)";
     private static final String FACE_CONTOUR = "Face Contour";
     private static final String TAG = "FaceCaptureActivity";
     private static final int PERMISSION_REQUESTS = 1;
@@ -55,7 +47,7 @@ public class FaceCaptureActivity extends AppCompatActivity
     private CameraSource cameraSource = null;
     private CameraSourcePreview preview;
     private GraphicOverlay graphicOverlay;
-    private String selectedModel = FACE_CONTOUR;
+    private String selectedModel = FACE_DETECTION;
 
     // TODO Check ML API GOOGLE
     private MaterialButton button;
@@ -79,13 +71,6 @@ public class FaceCaptureActivity extends AppCompatActivity
         List<String> options = new ArrayList<>();
         options.add(FACE_CONTOUR);
         options.add(FACE_DETECTION);
-        options.add(AUTOML_IMAGE_LABELING);
-        options.add(OBJECT_DETECTION);
-        options.add(TEXT_DETECTION);
-        options.add(BARCODE_DETECTION);
-        options.add(IMAGE_LABEL_DETECTION);
-        options.add(CLASSIFICATION_QUANT);
-        options.add(CLASSIFICATION_FLOAT);
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, R.layout.spinner_style,
@@ -186,23 +171,23 @@ public class FaceCaptureActivity extends AppCompatActivity
     }
 
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.live_preview_menu, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        if (item.getItemId() == R.id.settings) {
-//            Intent intent = new Intent(this, SettingsActivity.class);
-//            intent.putExtra(SettingsActivity.EXTRA_LAUNCH_SOURCE, LaunchSource.LIVE_PREVIEW);
-//            startActivity(intent);
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.live_preview_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            intent.putExtra(SettingsActivity.EXTRA_LAUNCH_SOURCE, SettingsActivity.LaunchSource.LIVE_PREVIEW);
+            startActivity(intent);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     private void createCameraSource(String model) {
         // If there's no existing cameraSource, create one.
