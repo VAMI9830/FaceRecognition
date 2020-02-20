@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "391615887922-a9oj9u8579vlc9lggkgqcdgh14kcocrp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ferm.FaceRecognition",
+            "certificate_hash": "b8457a9e14ca29808231737f972b7b67bf752e1c"
+          }
+        },
+        {
           "client_id": "391615887922-e85gg8ekb9msebod1g1its8obk50nkvi.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

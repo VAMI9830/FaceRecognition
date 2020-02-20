@@ -2,7 +2,7 @@
     <string name="app_name">FaceRecognition</string>
     <string name="sign_in">Inschrijven</string>
     <string name="save">opslaan</string>
-
+    <string name="scan">Scan</string>
     <string name="pref_key_rear_camera_preview_size" translatable="false">rcpvs</string>
     <string name="pref_key_rear_camera_picture_size" translatable="false">rcpts</string>
     <string name="pref_key_front_camera_preview_size" translatable="false">fcpvs</string>

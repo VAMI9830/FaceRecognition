@@ -3,9 +3,15 @@ package com.ferm.FaceRecognition;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
+import com.google.android.material.button.MaterialButton;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -20,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
+    private MaterialButton button;
+
     private FirebaseFirestore mDatabase;
 
     @Override
@@ -28,6 +36,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         this.mDatabase = FirebaseFirestore.getInstance();
+
+
+        button = (MaterialButton)findViewById(R.id.sign_in_button);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(true) {
+                    startActivity(new Intent(MainActivity.this, FaceCapture.class));
+                }
+                else {
+                    Toast toast = Toast.makeText(getApplicationContext(),"Hello Javatpoint",Toast.LENGTH_SHORT);
+                    toast.setMargin(50,50);
+                    toast.show();
+                    finishActivity(0);
+                }
+            }
+            });
 
         this.writeNewKid("Inschrijvingen", "1", "Karate", "Kid");
     }
