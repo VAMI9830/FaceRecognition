@@ -30,7 +30,7 @@ public class FaceCapture extends AppCompatActivity {
                     startActivity(new Intent(FaceCapture.this, RegistrationForm.class));
                 }
                 else {
-                    Toast toast = Toast.makeText(getApplicationContext(),"Hello Javatpoint",Toast.LENGTH_SHORT):
+                    Toast toast = Toast.makeText(getApplicationContext(),"Hello Javatpoint",Toast.LENGTH_SHORT);
                     toast.setMargin(50,50);
                     toast.show();
                     finishActivity(0);
