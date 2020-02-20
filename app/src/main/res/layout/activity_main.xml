@@ -7,24 +7,23 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="404dp"
-        android:layout_height="550dp"
+        android:layout_width="399dp"
+        android:layout_height="443dp"
         android:background="@color/colorPurple"
-        android:textAlignment="center"
         android:paddingTop="80dp"
         android:text="Ferm"
-        android:textSize="50dp"
+        android:textAlignment="center"
         android:textColor="#FFFF"
+        android:textSize="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.003"
-        />
+        app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/material_button"
+        android:id="@+id/sign_in_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorPurple"
