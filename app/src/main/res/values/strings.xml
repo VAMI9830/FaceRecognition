@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">FaceRecognition</string>
-    <string name="sign_in">signin</string>
+    <string name="sign_in">Inschrijven</string>
+    <string name="save">opslaan</string>
 </resources>
