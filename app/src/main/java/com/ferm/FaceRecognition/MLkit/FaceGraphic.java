@@ -32,14 +32,11 @@ public class FaceGraphic extends Graphic {
 
     private volatile FirebaseVisionFace firebaseVisionFace;
 
-    private final Bitmap overlayBitmap;
-
-    public FaceGraphic(GraphicOverlay overlay, FirebaseVisionFace face, int facing, Bitmap overlayBitmap) {
+    public FaceGraphic(GraphicOverlay overlay, FirebaseVisionFace face, int facing) {
         super(overlay);
 
         firebaseVisionFace = face;
         this.facing = facing;
-        this.overlayBitmap = overlayBitmap;
         final int selectedColor = Color.WHITE;
 
         facePositionPaint = new Paint();
@@ -116,7 +113,6 @@ public class FaceGraphic extends Graphic {
         drawLandmarkPosition(canvas, face, FirebaseVisionFaceLandmark.LEFT_EAR);
         drawLandmarkPosition(canvas, face, FirebaseVisionFaceLandmark.MOUTH_LEFT);
         drawLandmarkPosition(canvas, face, FirebaseVisionFaceLandmark.LEFT_EYE);
-        drawBitmapOverLandmarkPosition(canvas, face, FirebaseVisionFaceLandmark.NOSE_BASE);
         drawLandmarkPosition(canvas, face, FirebaseVisionFaceLandmark.RIGHT_CHEEK);
         drawLandmarkPosition(canvas, face, FirebaseVisionFaceLandmark.RIGHT_EAR);
         drawLandmarkPosition(canvas, face, FirebaseVisionFaceLandmark.RIGHT_EYE);
@@ -132,29 +128,5 @@ public class FaceGraphic extends Graphic {
                     translateY(point.getY()),
                     10f, idPaint);
         }
-    }
-
-    private void drawBitmapOverLandmarkPosition(Canvas canvas, FirebaseVisionFace face, int landmarkID) {
-        FirebaseVisionFaceLandmark landmark = face.getLandmark(landmarkID);
-        if (landmark == null) {
-            return;
-        }
-
-        FirebaseVisionPoint point = landmark.getPosition();
-
-        if (overlayBitmap != null) {
-            float imageEdgeSizeBasedOnFaceSize = (face.getBoundingBox().width() / 4.0f);
-
-            int left = (int) (translateX(point.getX()) - imageEdgeSizeBasedOnFaceSize);
-            int top = (int) (translateY(point.getY()) - imageEdgeSizeBasedOnFaceSize);
-            int right = (int) (translateX(point.getX()) + imageEdgeSizeBasedOnFaceSize);
-            int bottom = (int) (translateY(point.getY()) + imageEdgeSizeBasedOnFaceSize);
-
-            canvas.drawBitmap(overlayBitmap,
-                    null,
-                    new Rect(left, top, right, bottom),
-                    null);
-        }
-
     }
 }

@@ -15,13 +15,11 @@ package com.ferm.FaceRecognition.MLkit;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.util.Log;
 
-import com.ferm.FaceRecognition.R;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
@@ -44,18 +42,14 @@ public class FaceDetectionProcessor extends VisionProcessorBase<List<FirebaseVis
 
     private final FirebaseVisionFaceDetector detector;
 
-    private final Bitmap overlayBitmap;
-
     public FaceDetectionProcessor(Resources resources) {
         FirebaseVisionFaceDetectorOptions options =
                 new FirebaseVisionFaceDetectorOptions.Builder()
-                        .setClassificationMode(FirebaseVisionFaceDetectorOptions.ALL_CLASSIFICATIONS)
-                        .setLandmarkMode(FirebaseVisionFaceDetectorOptions.ALL_LANDMARKS)
+                        .setClassificationMode(FirebaseVisionFaceDetectorOptions.ACCURATE)
+                        .setLandmarkMode(FirebaseVisionFaceDetectorOptions.ALL_CONTOURS)
                         .build();
 
         detector = FirebaseVision.getInstance().getVisionFaceDetector(options);
-
-        overlayBitmap = BitmapFactory.decodeResource(resources, R.drawable.clown_nose);
     }
 
     @Override
@@ -89,7 +83,7 @@ public class FaceDetectionProcessor extends VisionProcessorBase<List<FirebaseVis
             int cameraFacing =
                     frameMetadata != null ? frameMetadata.getCameraFacing() :
                             Camera.CameraInfo.CAMERA_FACING_BACK;
-            FaceGraphic faceGraphic = new FaceGraphic(graphicOverlay, face, cameraFacing, overlayBitmap);
+            FaceGraphic faceGraphic = new FaceGraphic(graphicOverlay, face, cameraFacing);
             graphicOverlay.add(faceGraphic);
         }
         graphicOverlay.postInvalidate();
